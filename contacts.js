@@ -25,6 +25,7 @@ async function getContactById(contactId) {
 }
 
 async function removeContact(contactId) {
+try {
   const contacts = await listContacts();
   const contactIndex = contacts.findIndex(
     (contact) => contact.id === contactId
@@ -35,12 +36,16 @@ async function removeContact(contactId) {
   const [result] = contacts.splice(contactIndex, 1);
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return result;
+} catch (error) {
+console.log(error);
+}
 }
 
 // removeContact("rsKkOQUi80UsgVPCcLZZW");
 
 async function addContact(name, email, phone) {
-  const contacts = await listContacts();
+try {
+    const contacts = await listContacts();
 
   const newContact = {
     id: nanoid(),
@@ -52,6 +57,9 @@ async function addContact(name, email, phone) {
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
 
   return newContact;
+} catch (error) {
+  console.log(error);
+}
 }
 
 module.exports = { listContacts, getContactById, removeContact, addContact };
