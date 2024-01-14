@@ -1,5 +1,11 @@
-const {listContacts, getContactById, removeContact, addContact} = require("./contacts")
-const { program } = require("commander") ;
+const {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+} = require("./contacts");
+
+const { program } = require("commander");
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
@@ -40,4 +46,3 @@ async function invokeAction({ action, id, name, email, phone }) {
 }
 
 invokeAction(options);
-
